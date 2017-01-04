@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>All Products</title>
+    </head>
+    <body>
+        <h1>Products</h1>
+        <table style="width:100%">
+          <tr>
+            <th style="text-align:left">Name</th>
+            <th style="text-align:left">Description</th>
+            <th style="text-align:left">Price</th>
+            <th style="text-align:left">Actions</th>
+          </tr>
+          {% for product in products %}
+          <tr>
+            <td>{{product.product_name}}</td>
+            <td>{{product.product_description}}</td>
+            <td>${{product.product_price}}</td>
+            <td>
+                <form class="" action="/products/show/{{product.id}}" method="POST">
+                {% csrf_token %}
+                    <input type="submit" value="Show">
+                </form>
+                <form class="" action="/products/edit/{{product.id}}" method="POST">
+                {% csrf_token %}
+                    <input type="submit" value="Edit">
+                </form>
+                <form class="" action="/products/destroy/{{product.id}}" method="POST">
+                {% csrf_token %}
+                    <input type="submit" value="Remove">
+                </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <br>
+        <a href="/products/new">Add a new product</a>
+    </body>
+</html>
